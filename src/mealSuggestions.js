@@ -15,8 +15,10 @@ const mealSuggestions = {
     { name: "Bánh bèo (1 đĩa nhỏ)", calories: 180 },
     { name: "Bánh khọt (4 cái nhỏ)", calories: 220 },
     { name: "Cháo cá (1 bát)", calories: 260 },
-    { name: "Bánh ít trần (2 cái)", calories: 220 }, // Added
-    { name: "Bánh chưng (1 miếng vừa)", calories: 350 }, // Added
+    { name: "Bánh ít trần (2 cái)", calories: 220 },
+    { name: "Bánh chưng (1 miếng vừa)", calories: 350 },
+    { name: "Bún mọc (1 tô)", calories: 300 }, // Added
+    { name: "Xôi gấc (1 bát)", calories: 320 }, // Added
   ],
 
   lunch: [
@@ -35,8 +37,10 @@ const mealSuggestions = {
     { name: "Gà xào sả ớt (1 phần)", calories: 400 },
     { name: "Bún mắm (1 tô)", calories: 500 },
     { name: "Cơm gà xối mỡ (1 đĩa)", calories: 550 },
-    { name: "Cơm hến (1 đĩa)", calories: 450 }, // Added
-    { name: "Bún riêu (1 tô)", calories: 500 }, // Added
+    { name: "Cơm hến (1 đĩa)", calories: 450 },
+    { name: "Bún riêu (1 tô)", calories: 500 },
+    { name: "Cơm hải sản (1 đĩa)", calories: 550 }, // Added
+    { name: "Chả cá Hà Nội (1 phần)", calories: 450 }, // Added
   ],
 
   dinner: [
@@ -55,8 +59,10 @@ const mealSuggestions = {
     { name: "Mì xào (1 đĩa)", calories: 450 },
     { name: "Cơm gà chiên (1 đĩa)", calories: 500 },
     { name: "Đậu hũ xào rau củ (1 phần)", calories: 250 },
-    { name: "Gà kho gừng (1 phần)", calories: 350 }, // Added
-    { name: "Canh hến (1 bát)", calories: 200 }, // Added
+    { name: "Gà kho gừng (1 phần)", calories: 350 },
+    { name: "Canh hến (1 bát)", calories: 200 },
+    { name: "Cá chiên mắm tỏi (1 phần)", calories: 350 }, // Added
+    { name: "Bò nhúng dấm (1 phần)", calories: 400 }, // Added
   ],
 
   snacks: [
@@ -75,8 +81,10 @@ const mealSuggestions = {
     { name: "Bánh trôi nước (2 viên)", calories: 150 },
     { name: "Hạt hướng dương (1/4 cốc)", calories: 200 },
     { name: "Bánh ít (2 cái)", calories: 200 },
-    { name: "Chè thưng (1 bát)", calories: 200 }, // Added
-    { name: "Bánh cứng (1 cái nhỏ)", calories: 150 }, // Added
+    { name: "Chè thưng (1 bát)", calories: 200 },
+    { name: "Bánh cứng (1 cái nhỏ)", calories: 150 },
+    { name: "Bắp rang bơ (1 túi nhỏ)", calories: 180 }, // Added
+    { name: "Bánh bột lọc (2 cái)", calories: 120 }, // Added
   ],
 };
 
