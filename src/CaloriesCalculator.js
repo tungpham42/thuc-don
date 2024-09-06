@@ -4,12 +4,7 @@ import mealSuggestions from "./mealSuggestions";
 
 const CaloriesCalculator = () => {
   const [caloriesNeeded, setCaloriesNeeded] = useState(null);
-  const [mealPlan, setMealPlan] = useState({
-    breakfast: [],
-    lunch: [],
-    dinner: [],
-    snacks: [],
-  });
+  const [weeklyMealPlan, setWeeklyMealPlan] = useState([]);
 
   const mealCategories = {
     breakfast: "Bữa sáng",
@@ -17,6 +12,16 @@ const CaloriesCalculator = () => {
     dinner: "Bữa tối",
     snacks: "Bữa ăn nhẹ",
   };
+
+  const daysOfWeek = [
+    "Thứ Hai",
+    "Thứ Ba",
+    "Thứ Tư",
+    "Thứ Năm",
+    "Thứ Sáu",
+    "Thứ Bảy",
+    "Chủ Nhật",
+  ];
 
   const calculateCalories = (event) => {
     event.preventDefault();
@@ -36,24 +41,30 @@ const CaloriesCalculator = () => {
 
     const totalCalories = Math.round(BMR * parseFloat(activityLevel.value));
     setCaloriesNeeded(totalCalories);
-    generateMealPlan(totalCalories);
+    generateWeeklyMealPlan(totalCalories);
   };
 
-  const generateMealPlan = (calories) => {
+  const generateWeeklyMealPlan = (calories) => {
     const calorieLimit = calories / 4;
-    setMealPlan({
-      breakfast: getMealsWithinLimit(mealSuggestions.breakfast, calorieLimit),
-      lunch: getMealsWithinLimit(mealSuggestions.lunch, calorieLimit),
-      dinner: getMealsWithinLimit(mealSuggestions.dinner, calorieLimit),
-      snacks: getMealsWithinLimit(mealSuggestions.snacks, calorieLimit),
-    });
+    const planForWeek = [];
+
+    for (let i = 0; i < 7; i++) {
+      const dailyMealPlan = {
+        breakfast: getMealsWithinLimit(mealSuggestions.breakfast, calorieLimit),
+        lunch: getMealsWithinLimit(mealSuggestions.lunch, calorieLimit),
+        dinner: getMealsWithinLimit(mealSuggestions.dinner, calorieLimit),
+        snacks: getMealsWithinLimit(mealSuggestions.snacks, calorieLimit),
+      };
+      planForWeek.push(dailyMealPlan);
+    }
+
+    setWeeklyMealPlan(planForWeek);
   };
 
   const getMealsWithinLimit = (items = [], calorieLimit) => {
     let totalCalories = 0;
     let selectedMeals = [];
 
-    // Ensure items is an array and shuffle before selecting meals
     const shuffled = Array.isArray(items)
       ? [...items].sort(() => 0.5 - Math.random())
       : [];
@@ -68,27 +79,35 @@ const CaloriesCalculator = () => {
     return selectedMeals;
   };
 
-  const renderMealPlan = (category, meals) => (
-    <Col md={6}>
-      <Card className="mb-3">
-        <Card.Header>{mealCategories[category]}</Card.Header>
-        <Card.Body>
-          <ol>
-            {meals &&
-              meals.map((item, index) => (
-                <li key={index}>
-                  {item.name} - {item.calories} calo
-                </li>
-              ))}
-          </ol>
-        </Card.Body>
-      </Card>
-    </Col>
+  const renderMealPlanForDay = (dayIndex, meals) => (
+    <Card className="mb-3">
+      <Card.Header>{daysOfWeek[dayIndex]}</Card.Header>
+      <Card.Body>
+        <Row>
+          {Object.keys(mealCategories).map((category) => (
+            <Col md={6} key={category}>
+              <Card className="mb-3">
+                <Card.Header>{mealCategories[category]}</Card.Header>
+                <Card.Body>
+                  <ol>
+                    {meals[category].map((item, index) => (
+                      <li key={index}>
+                        {item.name} - {item.calories} calo
+                      </li>
+                    ))}
+                  </ol>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Card.Body>
+    </Card>
   );
 
   return (
     <Container className="mt-4">
-      <h1>Gợi ý thực đơn hàng ngày</h1>
+      <h1>Gợi ý thực đơn cho tuần</h1>
       <Form onSubmit={calculateCalories}>
         <Row>
           <Col md={4}>
@@ -136,7 +155,7 @@ const CaloriesCalculator = () => {
           </Col>
         </Row>
         <Button className="mt-3" type="submit">
-          Gợi ý
+          Gợi ý thực đơn cho tuần
         </Button>
       </Form>
 
@@ -146,15 +165,12 @@ const CaloriesCalculator = () => {
         </div>
       )}
 
-      {mealPlan && (
+      {weeklyMealPlan.length > 0 && (
         <div className="mt-4">
-          <h4>Gợi ý kế hoạch bữa ăn:</h4>
-          <Row>
-            {renderMealPlan("breakfast", mealPlan.breakfast)}
-            {renderMealPlan("lunch", mealPlan.lunch)}
-            {renderMealPlan("dinner", mealPlan.dinner)}
-            {renderMealPlan("snacks", mealPlan.snacks)}
-          </Row>
+          <h4>Kế hoạch bữa ăn hàng tuần:</h4>
+          {weeklyMealPlan.map((dailyMealPlan, index) => (
+            <div key={index}>{renderMealPlanForDay(index, dailyMealPlan)}</div>
+          ))}
         </div>
       )}
     </Container>
