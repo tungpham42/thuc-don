@@ -1,4 +1,4 @@
-# DEMO URL: [https://tungpham42.github.io/thuc-don/](https://tungpham42.github.io/thuc-don/)
+# DEMO URL: [https://tungpham42.github.io/thuc-don/](https://tungpham42.github.io/thuc-don/) or [https://thucdon.netlify.app/](https://thucdon.netlify.app/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
